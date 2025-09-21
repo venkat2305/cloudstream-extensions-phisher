@@ -193,13 +193,17 @@ class Animexin : MainAPI() {
             ?: source.quality
             ?: quality
 
-        if (decoratedName.isNotBlank()) {
-            this.name = decoratedName
+        var updatedLink = this
+
+        if (decoratedName.isNotBlank() && decoratedName != updatedLink.name) {
+            updatedLink = updatedLink.copy(name = decoratedName)
         }
 
-        resolvedQuality?.let { this.quality = it }
+        resolvedQuality?.takeIf { it != updatedLink.quality }?.let { qualityValue ->
+            updatedLink = updatedLink.copy(quality = qualityValue)
+        }
 
-        return this
+        return updatedLink
     }
 
     private suspend fun loadDailyMotionEnhanced(
