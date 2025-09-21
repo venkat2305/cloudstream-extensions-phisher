@@ -8,8 +8,9 @@ concurrency:
 on:
   push:
     branches:
-      # Temporarily disabled - change back to master/main to re-enable
-      - disabled-temporarily
+      # choose your default branch
+      - master
+      - main
     paths-ignore:
       - '*.md'
 
