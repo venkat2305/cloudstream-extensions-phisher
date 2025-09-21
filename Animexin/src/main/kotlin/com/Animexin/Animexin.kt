@@ -4,7 +4,7 @@ import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
 import org.jsoup.Jsoup
- 
+
 class Animexin : MainAPI() {
     override var mainUrl              = "https://animexin.dev"
     override var name                 = "Animexin"
