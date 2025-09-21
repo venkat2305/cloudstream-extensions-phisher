@@ -193,10 +193,13 @@ class Animexin : MainAPI() {
             ?: source.quality
             ?: quality
 
-        return this.copy(
-            name = decoratedName,
-            quality = resolvedQuality,
-        )
+        if (decoratedName.isNotBlank()) {
+            this.name = decoratedName
+        }
+
+        resolvedQuality?.let { this.quality = it }
+
+        return this
     }
 
     private suspend fun loadDailyMotionEnhanced(
@@ -228,9 +231,9 @@ class Animexin : MainAPI() {
                 .sortedByDescending { it.second ?: 0 }
                 .forEach { (stream, height) ->
                     generateM3u8(
-                        name = source.label,
-                        url = stream.url,
-                        referer = source.url
+                        source.label,
+                        stream.url,
+                        source.url
                     ).forEach { link ->
                         val decoratedSource = source.copy(quality = height)
                         callback(link.decorate(decoratedSource))
